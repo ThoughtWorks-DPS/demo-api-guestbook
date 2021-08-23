@@ -1,0 +1,25 @@
+# guestbook application
+
+env: demo-qa
+partof: demo-guestbook
+version: "0.1.0"
+
+registry: docker.io/twdps
+image: demo-guestbook
+replicas: 3
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "250m"
+  limits:
+    memory: "256Mi"
+    cpu: "250m"
+
+Service:
+  portname: guestbook
+  
+Ingress:
+  host: qa.twdps.digital
+  gateway: istio-system/twdps-digital-qa-gateway
+
+imagePullPolicy: Always
