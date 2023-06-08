@@ -24,7 +24,15 @@ build:
 push:
 	docker push $(REGISTRY)/$(IMAGE):$(REVISION)
 
+.PHONY: buildlocal
+buildlocal:
+	GOOS=$(GOOS) GOARCH=$(GOARCH) go build -o $(OUTPUT_DIR)/$(IMAGE)
+	chmod +x $(OUTPUT_DIR)/$(IMAGE)
+	docker build -t $(REGISTRY)/$(IMAGE):local -f Dockerfile .
 
+# .PHONY: push
+# push:
+# 	docker push $(REGISTRY)/$(IMAGE):$(REVISION)
 
 
 # .PHONY: environment local localredis clean
