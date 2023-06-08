@@ -1,0 +1,22 @@
+# guestbook application
+
+env: demo-prod
+partof: demo-guestbook
+version: "0.1.0"
+
+registry: docker.io/twdps
+image: demo-guestbook
+replicas: 3
+resources:
+  requests:
+    memory: "128Mi"
+    cpu: "250m"
+
+Service:
+  portname: guestbook
+  
+Ingress:
+  host: twdps.digital
+  gateway: istio-system/twdps-digital-prod-gateway
+
+imagePullPolicy: Always

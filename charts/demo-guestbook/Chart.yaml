@@ -1,4 +1,0 @@
-apiVersion: v2
-name: demo-guestbook
-version: 1.0.0
-description: Kubernetes guestbook example application

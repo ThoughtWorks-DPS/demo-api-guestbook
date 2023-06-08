@@ -1,4 +1,4 @@
-project_name: demo-guestbook
+project_name: demo-api-guestbook
 
 builds:
   - env: [CGO_ENABLED=0]
@@ -16,8 +16,8 @@ dockers:
   use: buildx
   dockerfile: Dockerfile
   image_templates:
-    - "docker.io/twdps/{{ .ProjectName }}:{{ .Version }}-linux-amd64"
-    - "docker.io/twdps/{{ .ProjectName }}:latest-linux-amd64"
+    - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-linux-amd64"
+    - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-linux-amd64"
   build_flag_templates:
     - --platform=linux/amd64
     - --label=org.opencontainers.image.title={{ .ProjectName }}
@@ -33,8 +33,8 @@ dockers:
   use: buildx
   dockerfile: Dockerfile
   image_templates:
-    - "docker.io/twdps/{{ .ProjectName }}:{{ .Version }}-linux-arm64"
-    - "docker.io/twdps/{{ .ProjectName }}:latest-linux-arm64"
+    - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-linux-arm64"
+    - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-linux-arm64"
   build_flag_templates:
     - --platform=linux/arm64/v8
     - --label=org.opencontainers.image.title={{ .ProjectName }}
@@ -46,17 +46,17 @@ dockers:
     - --label=org.opencontainers.image.licenses=MIT
 
 docker_manifests:
-  - name_template: docker.io/twdps/{{ .ProjectName }}:{{ .Version }}
+  - name_template: ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}
     image_templates:
-    - docker.io/twdps/{{ .ProjectName }}:{{ .Version }}-linux-amd64
-    - docker.io/twdps/{{ .ProjectName }}:{{ .Version }}-linux-arm64
-  - name_template: docker.io/twdps/{{ .ProjectName }}:latest
+    - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-linux-amd64
+    - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-linux-arm64
+  - name_template: ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest
     image_templates:
-    - docker.io/twdps/{{ .ProjectName }}:latest-linux-amd64
-    - docker.io/twdps/{{ .ProjectName }}:latest-linux-arm64
+    - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-linux-amd64
+    - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-linux-arm64
 
-docker_signs:
-  - cmd: cosign
-    stdin: '{{ .Env.COSIGN_PWD }}'
-    args: ["sign", "--key=cosign.key", "${artifact}"]
-    artifacts: all
+# docker_signs:
+#   - cmd: cosign
+#     stdin: '{{ .Env.COSIGN_PWD }}'
+#     args: ["sign", "--key=cosign.key", "${artifact}"]
+#     artifacts: all
