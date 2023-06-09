@@ -89,7 +89,7 @@ jobs:
 
   continuous-integration:
     docker:
-      - image: cimg/base:current
+      - image: cimg/go:1.20.4
     steps:
       - checkout
       - setup_remote_docker
@@ -112,9 +112,9 @@ jobs:
             curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $HOME/.go_workspace/bin v<< pipeline.parameters.golangci-lint-version >>
             golangci-lint --version
 
-            # echo 'install govulncheck'
-            # go install golang.org/x/vuln/cmd/govulncheck@<< pipeline.parameters.govulncheck-version >>
-            # govulncheck --help
+            curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
+            chmod +x ./snyk && mv ./snyk /usr/local/bin/
+            snyk version
       - run:
           name: static code analysis
           command: |
@@ -123,16 +123,16 @@ jobs:
           name: lint
           command: |
             golangci-lint run ./...
+      - run:
+          name: snyk vulnerability assessment
+          command: snyk test
       # - run:
-      #     name: golang specific vulnerability assessment
-      #     command: govulncheck ./...
-      - run:
-          name: build dev image
-          command: make build
-      - run:
-          name: push dev build to registry
-          command: make push
-      - integration-tests
+      #     name: build dev image
+      #     command: make build
+      # - run:
+      #     name: push dev build to registry
+      #     command: make push
+      # - integration-tests
 
   release:
     docker:
@@ -175,12 +175,12 @@ jobs:
 workflows:
   version: 2
 
-  # development build:
-  #   jobs:
-  #     - continuous-integration:
-  #         name: run static code analysis and integration tests
-  #         context: << pipeline.parameters.context >>
-  #         filters: *on-push-main
+  development build:
+    jobs:
+      - continuous-integration:
+          name: run static code analysis and integration tests
+          context: << pipeline.parameters.context >>
+          filters: *on-push-main
 
   release:
     jobs:

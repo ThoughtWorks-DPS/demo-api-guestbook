@@ -1,13 +1,17 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"github.com/gin-gonic/gin"
-	//"github.com/gin-gonic/contrib/static"
+	"github.com/gin-contrib/cors"
 )
 
 func main() {
 	router := gin.New()
+	router.Use(gin.Logger())
+
+	router.Use(cors.Default())
 
 	// TODO: add the following to the liveness reponse
 	// "version": settings.version,
@@ -21,5 +25,8 @@ func main() {
 		})
 	})
 
-	router.Run()
+	err := router.Run()
+	if err != nil {
+    	log.Fatal(err)
+	}
 }
