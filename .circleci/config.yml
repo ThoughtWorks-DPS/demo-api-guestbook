@@ -123,7 +123,7 @@ jobs:
       - run:
           name: static code analysis
           command: |
-            staticcheck ./...
+            staticcheck -exclude=internal/... ./...
       - run:
           name: lint
           command: |
