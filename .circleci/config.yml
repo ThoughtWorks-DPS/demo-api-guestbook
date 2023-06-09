@@ -70,7 +70,8 @@ commands:
           os: Ubuntu
       - op/env:
           env-file: op.env
-      - do/validate-docker-credentials
+      - do/validate-docker-credentials:
+          registry: ghcr.io
         
   # integration-tests:
   #   steps: 
