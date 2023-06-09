@@ -187,7 +187,7 @@ workflows:
       - release:
           name: publish release version
           context: << pipeline.parameters.context >>
-          filters: *on-push-main
+          filters: *on-tag-release
 
       # - smoke-test-containers:
       #     name: smoke test containers by architecture
