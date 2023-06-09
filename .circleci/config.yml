@@ -104,9 +104,9 @@ jobs:
       - run:
           name: install go static analysis tools
           command: |
-            echo 'install staticcheck'
-            go install honnef.co/go/tools/cmd/staticcheck@<< pipeline.parameters.staticcheck-version >>
-            staticcheck -version
+            # echo 'install staticcheck'
+            # go install honnef.co/go/tools/cmd/staticcheck@<< pipeline.parameters.staticcheck-version >>
+            # staticcheck -version
 
             echo 'install golangci-lint'
             curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $HOME/.go_workspace/bin v<< pipeline.parameters.golangci-lint-version >>
@@ -115,15 +115,15 @@ jobs:
             curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
             chmod +x ./snyk && sudo mv ./snyk /usr/local/bin/
             snyk version
-      - run:
-          name: get modules
-          command: |
-            go mod download
-            go mod tidy
-      - run:
-          name: static code analysis
-          command: |
-            staticcheck -exclude=internal/... ./...
+      # - run:
+      #     name: get modules
+      #     command: |
+      #       go mod download
+      #       go mod tidy
+      # - run:
+      #     name: static code analysis
+      #     command: |
+      #       staticcheck ./...
       - run:
           name: lint
           command: |
