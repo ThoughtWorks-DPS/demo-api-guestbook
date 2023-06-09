@@ -18,12 +18,6 @@ builds:
     goarch:
       - amd64
       - arm64
-      - arm
-    goarm:
-      - "8"
-    ignore:
-      - goos: darwin
-        goarch: arm
 
 dockers:
 
@@ -53,23 +47,6 @@ dockers:
       - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-linux-arm64"
     build_flag_templates:
       - --platform=linux/arm64
-      - --label=org.opencontainers.image.title={{ .ProjectName }}
-      - --label=org.opencontainers.image.url=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
-      - --label=org.opencontainers.image.source=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
-      - --label=org.opencontainers.image.vendor="ThoughtWorks, Inc."
-      - --label=org.opencontainers.image.version={{ .Version }}
-      - --label=org.opencontainers.image.revision={{ .FullCommit }}
-      - --label=org.opencontainers.image.licenses=MIT
-
-  - goos: linux
-    goarch: arm
-    use: buildx
-    dockerfile: Dockerfile
-    image_templates:
-      - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-linux-arm"
-      - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-linux-arm"
-    build_flag_templates:
-      - --platform=linux/arm
       - --label=org.opencontainers.image.title={{ .ProjectName }}
       - --label=org.opencontainers.image.url=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
       - --label=org.opencontainers.image.source=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
