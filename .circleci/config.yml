@@ -116,6 +116,11 @@ jobs:
             chmod +x ./snyk && sudo mv ./snyk /usr/local/bin/
             snyk version
       - run:
+          name: get modules
+          command: |
+            go mod download
+            go mod tidy
+      - run:
           name: static code analysis
           command: |
             staticcheck ./...
