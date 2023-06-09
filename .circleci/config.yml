@@ -113,7 +113,7 @@ jobs:
             golangci-lint --version
 
             curl --compressed https://static.snyk.io/cli/latest/snyk-linux -o snyk
-            chmod +x ./snyk && mv ./snyk /usr/local/bin/
+            chmod +x ./snyk && sudo mv ./snyk /usr/local/bin/
             snyk version
       - run:
           name: static code analysis
