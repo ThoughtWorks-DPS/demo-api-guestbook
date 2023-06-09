@@ -14,7 +14,7 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - darwin
+      # - darwin
     goarch:
       - amd64
       - arm64
@@ -55,53 +55,53 @@ dockers:
       - --label=org.opencontainers.image.revision={{ .FullCommit }}
       - --label=org.opencontainers.image.licenses=MIT
 
-  - goos: darwin
-    goarch: amd64
-    use: buildx
-    dockerfile: Dockerfile
-    image_templates:
-      - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-darwin-amd64"
-      - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-darwin-amd64"
-    build_flag_templates:
-      - --platform=darwin/amd64
-      - --label=org.opencontainers.image.title={{ .ProjectName }}
-      - --label=org.opencontainers.image.url=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
-      - --label=org.opencontainers.image.source=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
-      - --label=org.opencontainers.image.vendor="ThoughtWorks, Inc."
-      - --label=org.opencontainers.image.version={{ .Version }}
-      - --label=org.opencontainers.image.revision={{ .FullCommit }}
-      - --label=org.opencontainers.image.licenses=MIT
+  # - goos: darwin
+  #   goarch: amd64
+  #   use: buildx
+  #   dockerfile: Dockerfile
+  #   image_templates:
+  #     - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-darwin-amd64"
+  #     - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-darwin-amd64"
+  #   build_flag_templates:
+  #     - --platform=darwin/amd64
+  #     - --label=org.opencontainers.image.title={{ .ProjectName }}
+  #     - --label=org.opencontainers.image.url=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
+  #     - --label=org.opencontainers.image.source=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
+  #     - --label=org.opencontainers.image.vendor="ThoughtWorks, Inc."
+  #     - --label=org.opencontainers.image.version={{ .Version }}
+  #     - --label=org.opencontainers.image.revision={{ .FullCommit }}
+  #     - --label=org.opencontainers.image.licenses=MIT
 
-  - goos: darwin
-    goarch: arm64
-    use: buildx
-    dockerfile: Dockerfile
-    image_templates:
-      - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-darwin-arm64"
-      - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-darwin-arm64"
-    build_flag_templates:
-      - --platform=darwin/arm64
-      - --label=org.opencontainers.image.title={{ .ProjectName }}
-      - --label=org.opencontainers.image.url=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
-      - --label=org.opencontainers.image.source=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
-      - --label=org.opencontainers.image.vendor="ThoughtWorks, Inc."
-      - --label=org.opencontainers.image.version={{ .Version }}
-      - --label=org.opencontainers.image.revision={{ .FullCommit }}
-      - --label=org.opencontainers.image.licenses=MIT
+  # - goos: darwin
+  #   goarch: arm64
+  #   use: buildx
+  #   dockerfile: Dockerfile
+  #   image_templates:
+  #     - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-darwin-arm64"
+  #     - "ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-darwin-arm64"
+  #   build_flag_templates:
+  #     - --platform=darwin/arm64
+  #     - --label=org.opencontainers.image.title={{ .ProjectName }}
+  #     - --label=org.opencontainers.image.url=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
+  #     - --label=org.opencontainers.image.source=https://github.com/ThoughtWorks-DPS/{{ .ProjectName }}
+  #     - --label=org.opencontainers.image.vendor="ThoughtWorks, Inc."
+  #     - --label=org.opencontainers.image.version={{ .Version }}
+  #     - --label=org.opencontainers.image.revision={{ .FullCommit }}
+  #     - --label=org.opencontainers.image.licenses=MIT
 
 docker_manifests:
   - name_template: ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}
     image_templates:
       - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-linux-amd64
       - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-linux-arm64
-      - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-darwin-amd64
-      - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-darwin-arm64
+      # - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-darwin-amd64
+      # - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:{{ .Version }}-darwin-arm64
   - name_template: ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest
     image_templates:
       - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-linux-amd64
       - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-linux-arm64
-      - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-darwin-amd64
-      - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-darwin-arm64
+      # - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-darwin-amd64
+      # - ghcr.io/thoughtworks-dps/{{ .ProjectName }}:latest-darwin-arm64
 
 # docker_signs:
 #   - cmd: cosign
