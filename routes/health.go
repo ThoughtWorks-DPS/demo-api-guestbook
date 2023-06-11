@@ -20,6 +20,6 @@ func HealthLiveness(client *gin.Context) {
 func HealthReadiness(client *gin.Context) {
 	client.JSON(http.StatusOK, gin.H{
 		"status":      "ok",
-		"description": "hredis available",
+		"description": "successful connection to redis",
 	})
 }
