@@ -1,0 +1,17 @@
+# demo-api-guestbook environment specific values
+
+namespace: demo-prod
+
+api:
+  tag: 0.0.5
+  autoscaling:
+    minReplicas: 3
+    maxReplicas: 8
+  releaseMode: release
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi

@@ -1,0 +1,53 @@
+# demo-api-guestbook defaults
+
+namespace: demo-local
+partof: demo-guestbook
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+  
+service:
+  type: ClusterIP
+  portname: http-guestbook
+  protocol: TCP
+  port: 80
+
+api:
+  image: demo-api-guestbook
+  registry: ghcr.io/thoughtworks-dps
+  tag: 0.0.5
+  autoscaling:
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilizationPercentage: 80
+  ports: 
+    name: http-guestbook
+    containerPort: 3000
+  releaseMode: debug
+  env: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
+  livenessProbe:
+    httpGet:
+      path: /health/liveness
+      port: http-guestbook
+  readinessProbe:
+    httpGet:
+      path: /health/liveness
+      port: http-guestbook
+  
+nodeSelector: {}
+affinity: {}
+tolerations: {}
+
+imagePullPolicy: Always

@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "demo-api-guestbook.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "demo-api-guestbook.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "demo-api-guestbook.labels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ .Release.Name }}
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ .Values.api.registry }}/{{ .Values.api.image }}:{{ .Values.api.tag }}
+          imagePullPolicy: {{ .Values.imagePullPolicy }}
+          ports:
+            - name: {{ .Values.api.ports.name }}
+              containerPort: {{ .Values.api.ports.containerPort }}
+          env:
+            - name: GIN_MODE
+              value: {{ .Values.api.releaseMode }}
+            - name: PORT
+              value: {{ quote .Values.api.ports.containerPort }}
+          {{- if .Values.api.env }}
+            {{- toYaml .Values.api.env | nindent 12 }}
+          {{- end }}
+          {{- if .Values.api.resources }}
+          resources:
+            {{- toYaml .Values.api.resources | nindent 12 }}
+          {{- end }}
+          {{- if .Values.api.livenessProbe }}
+          livenessProbe:
+              {{- toYaml .Values.api.livenessProbe | nindent 12 }}
+          {{- end }}
+          {{- if .Values.api.readinessProbe }}
+          readinessProbe:
+              {{- toYaml .Values.api.readinessProbe | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if ne .Values.namespace "demo-local" }}
+      imagePullSecrets:
+        - name: regcreds
+      {{- end }}

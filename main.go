@@ -2,28 +2,22 @@ package main
 
 import (
 	"log"
-	"net/http"
+	//"net/http"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+
+	"src/github/ThoughtWorks-DPS/demo-api-guestbook/routes/health"
 )
 
 func main() {
 	router := gin.New()
 	router.Use(gin.Logger())
-
 	router.Use(cors.Default())
 
-	// TODO: add the following to the liveness reponse
-	// "version": settings.version,
-	// "releaseId": settings.releaseId,
-	// "time": datetime.now().isoformat()
+	router.GET("/health/liveness", HealthLiveness)
+	router.GET("/health/readiness", HealthReadiness)
 
-	router.GET("/health/liveness", func(client *gin.Context) {
-		client.JSON(http.StatusOK, gin.H{
-			"status": "ok",
-			"description": "health of guestbook api",
-		})
-	})
+	router.GET("/signatures", GetSignatures)
 
 	err := router.Run()
 	if err != nil {

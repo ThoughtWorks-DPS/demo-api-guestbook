@@ -9,9 +9,9 @@
 </div>
 <br />
 
-Part of the DPS `demo-team` series of applications and services. Useful in modeling pipeline architecture and the use of delivery platform resources. This example adapts the Kubernetes [guestbook-go](https://github.com/kubernetes/examples/tree/master/guestbook-go) application.  
+Part of the DPS `demo` team series of applications and services. Useful in modeling pipeline architecture and the use of delivery platform resources. This example adapts the Kubernetes [guestbook-go](https://github.com/kubernetes/examples/tree/master/guestbook-go) application.  
 
-The kubernetes guestbook app is a great application to use as demo for focusing on deployment automation and service mesh interactions. Keep in mind, you won't find unit tests or other common continuous integration elements in this pipeline.  
+The kubernetes guestbook app is a great application to use as a demo for focusing on deployment automation and service mesh interactions. Keep in mind, you won't find unit tests or other common continuous integration elements in this pipeline.  
 
 
 ** Please be patient while the chart is being deployed **
@@ -46,3 +46,14 @@ To connect to your database from outside the cluster execute the following comma
 
     kubectl port-forward --namespace twdps-core-labs-team-dev svc/guestbook-redis-master 6379:6379 &
     REDISCLI_AUTH="$REDIS_PASSWORD" redis-cli -h 127.0.0.1 -p 6379
+
+
+
+
+
+          
+          
+          
+
+      
+      

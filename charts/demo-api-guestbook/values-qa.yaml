@@ -1,0 +1,9 @@
+# demo-api-guestbook environment specific values
+
+namespace: demo-qa
+
+api:
+  tag: 0.0.5
+  autoscaling:
+    minReplicas: 3
+    maxReplicas: 5

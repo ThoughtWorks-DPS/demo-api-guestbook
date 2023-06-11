@@ -15,3 +15,5 @@
 # vendor/
 kubeconfig
 source.env
+dockerconfig.json
+registry-secret.yaml
