@@ -1,6 +1,4 @@
 # demo-api-guestbook defaults
-
-namespace: demo-local
 partof: demo-guestbook
 
 nameOverride: ""
@@ -20,7 +18,7 @@ service:
 api:
   image: demo-api-guestbook
   registry: ghcr.io/thoughtworks-dps
-  tag: 0.0.5
+  tag: ""
   autoscaling:
     minReplicas: 1
     maxReplicas: 3

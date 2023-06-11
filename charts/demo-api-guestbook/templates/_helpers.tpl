@@ -35,7 +35,7 @@ Common labels
 */}}
 {{- define "demo-api-guestbook.labels" -}}
 app: {{ include "demo-api-guestbook.name" . }}
-version: {{ .Chart.AppVersion | quote }}
+version: {{ .Values.api.tag }}
 env: {{ .Release.Namespace }}
 helm.sh/chart: {{ include "demo-api-guestbook.chart" . }}
 {{ include "demo-api-guestbook.selectorLabels" . }}
@@ -47,7 +47,7 @@ Selector labels
 {{- define "demo-api-guestbook.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "demo-api-guestbook.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+app.kubernetes.io/version: {{ .Values.api.tag }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{- end }}
 

@@ -1,7 +1,5 @@
 # demo-api-guestbook environment specific values
 
-namespace: demo-qa
-
 api:
   tag: 0.0.5
   autoscaling:

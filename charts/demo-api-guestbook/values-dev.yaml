@@ -1,6 +1,4 @@
 # demo-api-guestbook environment specific values
 
-namespace: demo-dev
-
 api:
   tag: 0.0.5
