@@ -62,13 +62,13 @@ jobs:
       - checkout
       - setup_remote_docker
       - set-environment
-      - kube/packages:
-          use-sudo: true
-          kubectl-version: *kubectl-version
-          kind-version: *kind-version
-      - kube/packages:
-          use-sudo: false
-          bats-version: *bats-version
+      # - kube/packages:
+      #     use-sudo: true
+      #     kubectl-version: *kubectl-version
+      #     kind-version: *kind-version
+      # - kube/packages:
+      #     use-sudo: false
+      #     bats-version: *bats-version
       - run:
           name: install go static analysis tools
           command: |
