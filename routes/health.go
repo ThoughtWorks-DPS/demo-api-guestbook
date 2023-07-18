@@ -11,7 +11,7 @@ import (
 	// "time": datetime.now().isoformat()
 func HealthLiveness(client *gin.Context) {
 	client.JSON(http.StatusOK, gin.H{
-		"status":      "ok",
+		"message":      "ok",
 		"description": "health of guestbook api",
 	})
 }
@@ -19,7 +19,7 @@ func HealthLiveness(client *gin.Context) {
 // TODO: test for redis access
 func HealthReadiness(client *gin.Context) {
 	client.JSON(http.StatusOK, gin.H{
-		"status":      "ok",
+		"message":      "ok",
 		"description": "successful connection to redis",
 	})
 }

@@ -14,8 +14,8 @@ func main() {
 	router.Use(gin.Logger())
 	router.Use(cors.Default())
 
-	router.GET("/health/liveness", routes.HealthLiveness)
-	router.GET("/health/readiness", routes.HealthReadiness)
+	router.GET("/healthz/liveness", routes.HealthLiveness)
+	router.GET("/healthz/readiness", routes.HealthReadiness)
 
 	router.GET("/signatures", routes.GetSignatures)
 
